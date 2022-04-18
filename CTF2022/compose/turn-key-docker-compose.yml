@@ -1,0 +1,21 @@
+version: "2.4"
+
+services:
+  turn-key:
+    image: registry.digitalocean.com/infosec-registry/turn-key:latest
+    container_name: challenge.turn-key
+    pids_limit: 50
+    ports:
+      - "5555:5555"
+    restart: unless-stopped
+    environment:
+      - SERVER_NUMBER=${SERVER_NUMBER}
+      - NUMBER_OF_SERVERS=${NUMBER_OF_SERVERS}
+      - KEY_PERIOD=${KEY_PERIOD}
+      - PROTOCOL_TIME=${PROTOCOL_TIME}
+  watchtower:
+      image: containrrr/watchtower
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - /root/.docker/config.json:/config.json
+      command: --interval 180

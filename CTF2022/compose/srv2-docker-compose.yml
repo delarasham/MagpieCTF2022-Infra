@@ -1,0 +1,63 @@
+version: "2.4"
+
+services:
+    crack-the-safe:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/crack-the-safe:latest
+        container_name: crack-the-safe
+        pids_limit: 50
+        ports:
+            - "3467:80"
+        restart: unless-stopped
+    garbage-collector-web:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/garbage-collector-frontend:latest
+        container_name: garbage-collector-frontend
+        pids_limit: 50
+        ports:
+            - "8081:80"
+        restart: unless-stopped
+    garbage-collector-api:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/garbage-collector-backend:latest
+        container_name: garbage-collector-backend
+        pids_limit: 50
+        ports:
+            - "3000:3000"
+        restart: unless-stopped  
+    last-act-of-defiance:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/last-act-of-defiance:latest
+        container_name: last-act-of-defiance
+        pids_limit: 50
+        ports:
+            - "9355:80"
+        restart: unless-stopped
+    old-family-recipe:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/old-family-recipe:latest
+        container_name: old-family-recipe
+        pids_limit: 50
+        ports:
+            - "9949:80"
+        restart: unless-stopped   
+    scattered-letters:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/scattered-letters:latest
+        container_name: scattered-letters
+        pids_limit: 50
+        ports:
+            - "7633:8080"
+        restart: unless-stopped
+    sticky-note:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/sticky-note:latest
+        container_name: sticky-note
+        pids_limit: 50
+        ports:
+            - "2222:22"
+        restart: unless-stopped
+    email-checker:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/nitwit-financial-techniques:latest
+        container_name: nitwit-financial-techniques
+        pids_limit: 50
+        restart: unless-stopped
+    watchtower:
+        image: containrrr/watchtower
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /root/.docker/config.json:/config.json
+        command: --interval 180

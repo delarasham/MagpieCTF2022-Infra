@@ -1,0 +1,65 @@
+version: "2.4"
+
+services:
+    blame-the-intern:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/blame-the-intern:latest
+        container_name: blame-the-intern
+        pids_limit: 50
+        ports:
+            - "8594:5000"
+        restart: unless-stopped
+    out-of-mind:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/out-of-mind:latest
+        container_name: out-of-mind
+        pids_limit: 50
+        ports:
+            - "45123:22"
+            - "12323:79"
+        restart: unless-stopped
+    safe-js:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/safe-js:latest
+        container_name: safe-js
+        pids_limit: 50
+        ports:
+            - "3665:8000"
+        restart: unless-stopped
+    stacks-of-flags:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/stacks-of-flags:latest
+        container_name: stacks-of-flags
+        pids_limit: 50
+        ports:
+            - "1946:1946"
+        privileged: true
+        restart: unless-stopped
+    compare-and-contrast:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/compare-and-contrast:latest
+        container_name: compare-and-contrast
+        pids_limit: 50
+        ports:
+            - "43212:8000"
+        restart: unless-stopped
+    diversionary-havoc:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/diversionary-havoc:latest
+        container_name: diversionary-havoc
+        pids_limit: 50
+        ports:
+            - "20000:20000"
+        restart: unless-stopped
+    mission-impossible:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/mission-impossible:latest
+        container_name: mission-impossible
+        pids_limit: 50
+        ports:
+            - "45451:80"
+        restart: unless-stopped
+    discord-bot:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/where-are-mom-and-pop:latest
+        container_name: where-are-mom-and-pop
+        pids_limit: 50
+        restart: unless-stopped
+    watchtower:
+        image: containrrr/watchtower
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /root/.docker/config.json:/config.json
+        command: --interval 180

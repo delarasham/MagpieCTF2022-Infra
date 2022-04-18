@@ -1,0 +1,57 @@
+version: "2.4"
+
+services:
+    magpienet:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/magpienet:latest
+        container_name: magpienet
+        pids_limit: 50
+        ports:
+            - "46442:46442"
+            - "46487:46487"
+            - "46441:46441"
+            - "46301:46301"
+            - "46316:46316"
+            - "46102:46102"
+            - "46911:46911"
+            - "46382:46382"
+            - "41111:41111"
+            - "41122:41122"
+            - "49988:49988"
+        restart: unless-stopped
+    secure-ls:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/secure-ls:latest
+        container_name: secure-ls
+        pids_limit: 50
+        ports:
+            - "8754:8754"
+        privileged: true
+        restart: unless-stopped
+    our-files-are-belong-only-to-us:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/our-files-are-belong-only-to-us:latest
+        container_name: our-files-are-belong-only-to-us
+        pids_limit: 50
+        ports:
+            - "23211:8080"
+        restart: unless-stopped
+    biometric-heap:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/biometric-heap:latest
+        container_name: biometric-heap
+        pids_limit: 50
+        ports:
+            - "3609:3609"
+        privileged: true
+        restart: unless-stopped
+    intact:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/intact:latest
+        container_name: intact
+        pids_limit: 50
+        ports:
+            - "2007:2007"
+        privileged: true
+        restart: unless-stopped
+    watchtower:
+        image: containrrr/watchtower
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /root/.docker/config.json:/config.json
+        command: --interval 180

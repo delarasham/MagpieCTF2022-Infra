@@ -1,0 +1,19 @@
+version: "2.4"
+
+services:
+    one-true-encryption:
+        image: <accountID>.dkr.ecr.us-east-2.amazonaws.com/one-true-encryption:latest
+        container_name: one-true-encryption
+        pids_limit: 50
+        ports:
+            - "31337:31337"
+        restart: unless-stopped 
+    watchtower:
+        image: containrrr/watchtower
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /root/.docker/config.json:/config.json
+        command: --interval 180
+
+
+ 
